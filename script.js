@@ -1,3 +1,5 @@
+
+
 /*
 const jimmie = Player('jim', 10);
 const badGuy = Player('jeff', 5);
@@ -37,8 +39,15 @@ function gameDisplayController() {
     let moveDiv = document.createElement('div')
     moveDiv.textContent = board[i]
     moveDiv.id = i
+    moveDiv.classList.add('boardtile')
     gameBoardContainer.appendChild(moveDiv)
   }
 }
+
+function markGameboard(){
+
+}
+
+
 
 gameDisplayController()
