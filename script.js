@@ -43,11 +43,14 @@ function gameDisplayController() {
     gameBoardContainer.appendChild(moveDiv)
   }
 }
-
 function markGameboard(){
+  let boardTile = document.getElementsByClassName('boardtile') 
+  function logId() {
+    console.log(boardTile.id)
+  }
+  boardTile.addEventListener('click', logId)
 
 }
 
-
-
+//markGameboard()
 gameDisplayController()
