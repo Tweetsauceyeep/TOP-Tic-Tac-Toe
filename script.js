@@ -14,13 +14,12 @@ const newPlayer = (symbol, name) => {
   return { getSymbol, getName, getPlayerTurn }
 }
 
-const jimmie = newPlayer('X', 'jimmie')
-console.log(jimmie.getSymbol(), jimmie.getName()) //note to make the method a func when you call it or it dont worky
+const playerOne = newPlayer('X', 'jimmie')
 
 // module pattern to keep gameboard out of global scope
 const GameModule = (function () {
   let GameBoardObj = {
-    gameboard: ["X", "O", "X", "O", "X", "O", "X", "O", "X"] // use array to hold gameboard
+    gameboard: ["X", "O", "X", "O", "X", "O", "X", " ", "X"] // use array to hold gameboard
 
   }
 
@@ -44,24 +43,38 @@ function gameDisplayController() {
     gameBoardContainer.appendChild(moveDiv)
   }
 }
+/*function reRenderBoard(){
+  const gameboardArray = GameModule.GameBoardObj.gameboard
+  let boardTile = document.querySelectorAll('.boardtile')
 
+  for (let i = 0; i < gameboardArray.length; i++){
+    if (gameboardArray[i] === " " ){
+      
+    
+    } else {
+      return
+    }
+  }
+}
+*/
 
 function markGameboard() { // click stuff and change value on gameboard 
   const gameboardArray = GameModule.GameBoardObj.gameboard
-  console.log(`gmbrdarr.length = ${gameboardArray.length}`) // show if i got the right thing
-  console.log(gameboardArray)
-  let boardTile = document.querySelectorAll('.boardtile')
   
-  // function to add elements to a specific index in an arr.
-  function insertAt(array, start, insElement) {
-    array.splice(start, 0, insElement)
-  }
+  let boardTile = document.querySelectorAll('.boardtile')
 
+  // function to add elements to a specific index in an arr.
+  function updateBoard(index) {
+    gameboardArray[index] = "X"
+  }
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
     boardTile[i].addEventListener('click', () => {
-      console.log(`Tile id: ${boardTile[i].id} player Symbol: ${jimmie.getSymbol()}`)
-      insertAt(gameboardArray, boardTile[i].id, 'x')
+       //create a function to iterate over the arr and
+      // if index in arr is empty re render that part only.
+      updateBoard(boardTile[i].id) 
+      console.log(gameboardArray)
+
     })
   }
 
