@@ -1,5 +1,5 @@
 tasks:
-
+completed (10 - 24 - 21 => 10 - 25 - 21)
 1.find a way to render the gameboard [done]
 - gave each div an id. [done]
 - find a way so that when you click a specific div. 
