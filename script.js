@@ -5,33 +5,34 @@ const jimmie = Player('jim', 10);
 const badGuy = Player('jeff', 5);
 jimmie.attack(badGuy);
 */
-
+// player factory function
 const newPlayer = (symbol, name) => {
   const getSymbol = () => symbol;
   const getName = () => name;
   const getPlayerTurn = true
 
-  return { getSymbol, getName, getPlayerTurn}
+  return { getSymbol, getName, getPlayerTurn }
 }
 
 const jimmie = newPlayer('X', 'jimmie')
 console.log(jimmie.getSymbol(), jimmie.getName()) //note to make the method a func when you call it or it dont worky
 
+// module pattern to keep gameboard out of global scope
 const GameModule = (function () {
-  let GameBoard = {
+  let GameBoardObj = {
     gameboard: ["X", "O", "X", "O", "X", "O", "X", "O", "X"] // use array to hold gameboard
 
   }
 
 
   return {
-    GameBoard
+    GameBoardObj
   }
 })()
 
 
 function gameDisplayController() {
-  let board = GameModule.GameBoard.gameboard
+  let board = GameModule.GameBoardObj.gameboard
   const gameBoardContainer = document.querySelector('#gameboard')
   console.log(GameModule.gameboard)
 
@@ -43,14 +44,23 @@ function gameDisplayController() {
     gameBoardContainer.appendChild(moveDiv)
   }
 }
-function markGameboard(){
-  let boardTile = document.getElementsByClassName('boardtile') 
-  function logId() {
-    console.log(boardTile.id)
-  }
-  boardTile.addEventListener('click', logId)
 
+
+function markGameboard() { // click stuff and change value on gameboard 
+  const gameboardArray = GameModule.GameBoardObj.gameboard
+  let boardTile = document.querySelectorAll('.boardtile')
+
+
+  // iterate over boardtile class and add an event listener to each element
+  for (let i = 0; i < boardTile.length; i++){     
+    boardTile[i].addEventListener('click', ()=>{
+      console.log(boardTile[i].id)
+    })
+  }
+    
+  
 }
 
-//markGameboard()
+
 gameDisplayController()
+markGameboard()
