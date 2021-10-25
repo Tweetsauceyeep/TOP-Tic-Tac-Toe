@@ -6,6 +6,13 @@
     max-width: 300px;
 }
 
+.boardtile{
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    border: 2px black;
+}
+
 .boardtile:hover {
     background-color: pink;
 }

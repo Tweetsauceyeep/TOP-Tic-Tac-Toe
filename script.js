@@ -48,17 +48,23 @@ function gameDisplayController() {
 
 function markGameboard() { // click stuff and change value on gameboard 
   const gameboardArray = GameModule.GameBoardObj.gameboard
+  console.log(`gmbrdarr.length = ${gameboardArray.length}`) // show if i got the right thing
   let boardTile = document.querySelectorAll('.boardtile')
-
+  
+  // function to add elements to a specific index in an arr.
+  function insertAt(array, start, insElement) {
+    array.splice(start, 0, insElement)
+  }
 
   // iterate over boardtile class and add an event listener to each element
-  for (let i = 0; i < boardTile.length; i++){     
-    boardTile[i].addEventListener('click', ()=>{
+  for (let i = 0; i < boardTile.length; i++) {
+    boardTile[i].addEventListener('click', () => {
       console.log(boardTile[i].id)
+      insertAt(gameboardArray, boardTile[i].id, 'x')
     })
   }
-    
-  
+
+
 }
 
 
