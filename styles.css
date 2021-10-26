@@ -1,6 +1,5 @@
 #gameboard {
-    background-color: cyan;
-    border: 2px black;
+    border: solid 2px black;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -9,10 +8,11 @@
 }
 
 .boardtile{
-    text-align: center;
-    height: 30px;
-    width: 30px;
-    border: 2px black;
+    border: solid black 1px;
+    text-align: center; 
+    justify-content: middle;
+    height: 100px;
+    width: auto;
 }
 
 .boardtile:hover {

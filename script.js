@@ -1,11 +1,17 @@
-
-
 /*
 const jimmie = Player('jim', 10);
 const badGuy = Player('jeff', 5);
 jimmie.attack(badGuy);
 */
-// player factory function
+/* player factory function
+const newPlayer = (symbol, name, playerTurn) => {
+  const getSymbol = () => symbol;
+  const getName = () => name;
+  const getPlayerTurn = () => playerTurn;
+
+  return { getSymbol, getName, getPlayerTurn }
+}
+*/
 const newPlayer = (symbol, name, playerTurn) => {
   const getSymbol = () => symbol;
   const getName = () => name;
@@ -14,9 +20,13 @@ const newPlayer = (symbol, name, playerTurn) => {
   return { getSymbol, getName, getPlayerTurn }
 }
 
+
+
 const playerOne = newPlayer('X', 'playerOne', true)
 const playerTwo = newPlayer('O', 'playerTwo', false)
 // homie use capital letter O 
+
+
 // module pattern to keep gameboard out of global scope
 const GameModule = (function () {
   let GameBoardObj = {
@@ -63,7 +73,6 @@ function gameDisplayController() {
   }
 }
 function reRenderBoard(index) { //TODO: Fix this: check if array has empty. if empty run update board func 
-  const gameboardArray = GameModule.GameBoardObj.gameboard
   let boardTile = document.querySelectorAll('.boardtile')
   boardTile[index].textContent = playerOne.getSymbol()    
 
@@ -76,11 +85,11 @@ function markGameboard() { // click stuff and change value on gameboard
 
   //TODO: function to add elements to a specific index in an arr. [works]
   function updateBoard(index) {
-    gameboardArray[index] = "X"
+    gameboardArray[index] = playerOne.getSymbol
   }
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
-    boardTile[i].addEventListener('click', () => {
+    boardTile[i].addEventListener('click', () => { //TODO: updates both board array and dom.
       //create a function to iterate over the arr and
       // if index in arr is empty re render that part only.
       updateBoard(boardTile[i].id)
