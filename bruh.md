@@ -13,3 +13,8 @@ it pushes the symbol to the specific index in an array [done]
 
 2. find a way to change the value of the div thingy use 
 some event handler to push a new value to a specific index[done]
+
+3. Turn based system: once 'x' is placed. place 'O'
+- used helper functions.
+    -validateCurrentPlayer = check if certain vals are true and returns current player if true
+    -currentPlayerSwitcher = if playerOne.getPlayerTurn val is true, make it false and the playerTwo val true
