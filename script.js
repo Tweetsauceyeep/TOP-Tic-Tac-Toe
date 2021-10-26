@@ -1,22 +1,5 @@
-/*
-const jimmie = Player('jim', 10);
-const badGuy = Player('jeff', 5);
-jimmie.attack(badGuy);
-*/
-/* player factory function
-const newPlayer = (symbol, name, playerTurn) => {
-  const getSymbol = () => symbol;
-  const getName = () => name;
-  const getPlayerTurn = () => playerTurn;
 
-  return { getSymbol, getName, getPlayerTurn }
-}
-*/
-const newPlayer = (symbol, name, playerTurn) => {
-  const getSymbol = () => symbol;
-  const getName = () => name;
-  const getPlayerTurn = () => playerTurn;
-
+const newPlayer = (getSymbol, getName, getPlayerTurn) => {
   return { getSymbol, getName, getPlayerTurn }
 }
 
@@ -25,6 +8,10 @@ const newPlayer = (symbol, name, playerTurn) => {
 const playerOne = newPlayer('X', 'playerOne', true)
 const playerTwo = newPlayer('O', 'playerTwo', false)
 // homie use capital letter O 
+
+
+
+
 
 
 // module pattern to keep gameboard out of global scope
@@ -58,6 +45,28 @@ const GameModule = (function () {
   }
 })()
 
+// =====================================FUNCTIONS==============================================
+function validateCurrentPlayer(){
+  let currentPlayer;
+  if (playerOne.getPlayerTurn === true){
+    currentPlayer = playerOne.getSymbol
+  } else {
+    currentPlayer = playerTwo.getSymbol    }
+    return currentPlayer
+  }
+  
+  function currentPlayerSwitcher(){
+    let playerOneTurn = playerOne.getPlayerTurn
+    if(playerOneTurn === true){
+      playerOne.getPlayerTurn = false;
+      playerTwo.getPlayerTurn = true;
+    } else if (playerOneTurn === false){
+      playerOne.getPlayerTurn = true;
+      playerTwo.getPlayerTurn = false;
+    }
+  }
+
+
 
 function gameDisplayController() {
   let board = GameModule.GameBoardObj.gameboard
@@ -72,9 +81,9 @@ function gameDisplayController() {
     gameBoardContainer.appendChild(moveDiv)
   }
 }
-function reRenderBoard(index) { //TODO: Fix this: check if array has empty. if empty run update board func 
+function reRenderBoard(index,currentPlayer) { //TODO: Fix this: check if array has empty. if empty run update board func 
   let boardTile = document.querySelectorAll('.boardtile')
-  boardTile[index].textContent = playerOne.getSymbol()    
+  boardTile[index].textContent = currentPlayer//TODO:replace w/ current player var    
 
 }
 
@@ -83,18 +92,19 @@ function markGameboard() { // click stuff and change value on gameboard
 
   let boardTile = document.querySelectorAll('.boardtile')
 
-  //TODO: function to add elements to a specific index in an arr. [works]
-  function updateBoard(index) {
-    gameboardArray[index] = playerOne.getSymbol
+  function updateBoard(index, currentPlayer) {
+    gameboardArray[index] = currentPlayer //TODO:replace w/ current player var
   }
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
     boardTile[i].addEventListener('click', () => { //TODO: updates both board array and dom.
       //create a function to iterate over the arr and
       // if index in arr is empty re render that part only.
-      updateBoard(boardTile[i].id)
-      reRenderBoard(boardTile[i].id)
+      
+      updateBoard(boardTile[i].id, validateCurrentPlayer())
+      reRenderBoard(boardTile[i].id, validateCurrentPlayer())
       console.log(gameboardArray)
+      currentPlayerSwitcher()      
 
     })
   }

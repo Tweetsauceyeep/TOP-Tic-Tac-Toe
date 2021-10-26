@@ -29,9 +29,11 @@ let testFunc = () => {
   currentPlayerSwitcher()
   console.log(validateCurrentPlayer())
 }
+
 //playerTwo.getPlayerTurn = false 
 //playerOne.getPlayerTurn = true 
 //console.log(validatePlayer())
+testFunc()
 testFunc()
 testFunc()
 testFunc()
