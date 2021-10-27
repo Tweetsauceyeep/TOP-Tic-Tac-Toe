@@ -1,5 +1,5 @@
 body {
-    background-color: #404E5C; 
+background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
 }
 
 #gameboard {
@@ -22,7 +22,7 @@ body {
 }
 
 .boardtile:hover {
-    background-color: lightpink;
+    background-color: lightgray;
 
 }
 

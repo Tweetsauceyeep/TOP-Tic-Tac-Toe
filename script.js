@@ -11,7 +11,7 @@ const playerTwo = newPlayer('O', 'playerTwo', false)
 // module pattern to keep gameboard out of global scope
 const GameModule = (function () {
   let GameBoardObj = {
-    gameboard: [" ", " ", " ", " ", " ", " ", " ", " ", " "],// use array to hold gameboard
+    gameboard: [" ", " ", " ", " ", " ", " ", " ", " ", " "],// use arr to hold gameboard
     /*
     [
       [0,1,2], visual representation of board.
@@ -33,14 +33,34 @@ const GameModule = (function () {
     ]
   }
 
-
   return {
     GameBoardObj
   }
 })()
-
+console.log(GameModule.GameBoardObj.winningConditions)
 // =====================================FUNCTIONS==============================================
-const isValidAction = (tile) =>{
+// this dont work homo
+function handleResultValidation() {
+  let board = GameModule.GameBoardObj.gameboard
+  let roundWon = false 
+  for (let i = 0; i <= 7; i++){
+    const winCondition = GameModule.GameBoardObj.winningConditions
+    const a = board[winCondition[0]];
+    const b = board[winCondition[1]];
+    const c = board[winCondition[2]];
+    if (a === " " || b === " " || c === " ") {
+      continue 
+    } 
+    if (a === b && b === c){
+      roundWon = true
+      break;
+    }
+  }
+}
+
+
+
+const isValidAction = (tile) =>{// tests wether a tile has something in it. returns false if not
   if (tile.innerText === 'X' || tile.innerText === 'O') {
     return false
   } 
@@ -82,15 +102,18 @@ function gameDisplayController() {
   }
 }
 
-function reRenderBoard(index,currentPlayer) { //TODO: Fix this: check if array has empty. if empty run update board func 
-  let boardTile = document.querySelectorAll('.boardtile')
-  boardTile[index].textContent = currentPlayer
-}
 
 function markGameboard() { // click stuff and change value on gameboard  
   const gameboardArray = GameModule.GameBoardObj.gameboard
 
   let boardTile = document.querySelectorAll('.boardtile')
+
+
+  
+  function reRenderBoard(index,currentPlayer) {//  check if array has empty. if empty run update board func 
+  let boardTile = document.querySelectorAll('.boardtile')
+  boardTile[index].textContent = currentPlayer
+  }
 
   function updateBoard(index, currentPlayer) {
     gameboardArray[index] = currentPlayer //TODO:replace w/ current player var
@@ -107,7 +130,7 @@ function markGameboard() { // click stuff and change value on gameboard
         updateBoard(boardTile[i].id, validateCurrentPlayer())
         reRenderBoard(boardTile[i].id, validateCurrentPlayer())
         console.log(gameboardArray)
-        currentPlayerSwitcher()      
+        currentPlayerSwitcher()
       } else {return}
     })
   }
