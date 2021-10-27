@@ -66,7 +66,6 @@ function validateCurrentPlayer(){
 function gameDisplayController() {
   let board = GameModule.GameBoardObj.gameboard
   const gameBoardContainer = document.querySelector('#gameboard')
-  console.log(GameModule.gameboard)
 
   for (let i = 0; i < board.length; i++) {
     let moveDiv = document.createElement('div')
@@ -107,7 +106,6 @@ function markGameboard() { // click stuff and change value on gameboard
 
 
 }
-
 
 gameDisplayController()
 markGameboard()
