@@ -1,5 +1,5 @@
 body {
-    background-color: grey;
+    background-color: #404E5C; 
 }
 
 #gameboard {
@@ -13,7 +13,7 @@ body {
 .boardtile{
 
     background-color: white;
-    border: solid black 1px;
+    border: solid #81A4CD 1px;
     font-size: 80px ;
     text-align: center; 
     justify-content: middle;
@@ -22,6 +22,7 @@ body {
 }
 
 .boardtile:hover {
-    background-color: pink;
+    background-color: lightpink;
+
 }
 

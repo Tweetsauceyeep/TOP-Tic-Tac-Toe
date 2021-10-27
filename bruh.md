@@ -19,6 +19,7 @@ some event handler to push a new value to a specific index[done]
     -validateCurrentPlayer = check if certain vals are true and returns current player if true
     -currentPlayerSwitcher = if playerOne.getPlayerTurn val is true, make it false and the playerTwo val true
 
-4. Implement some func to make it so you cant edit a tile if it already has something in it
+4. Implement some func to make it so you cant edit a tile 
+if it already has something in it
 
 5. implement a func to check for a winner

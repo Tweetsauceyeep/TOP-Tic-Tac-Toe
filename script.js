@@ -8,7 +8,6 @@ const newPlayer = (getSymbol, getName, getPlayerTurn) => {
 const playerOne = newPlayer('X', 'playerOne', true)
 const playerTwo = newPlayer('O', 'playerTwo', false)
 // homie use capital letter O 
-
 // module pattern to keep gameboard out of global scope
 const GameModule = (function () {
   let GameBoardObj = {
@@ -41,6 +40,13 @@ const GameModule = (function () {
 })()
 
 // =====================================FUNCTIONS==============================================
+const isValidAction = (tile) =>{
+  if (tile.innerText === 'X' || tile.innerText === 'O') {
+    return false
+  } 
+  return true
+}
+
 function validateCurrentPlayer(){
   let currentPlayer;
   if (playerOne.getPlayerTurn === true){
@@ -62,7 +68,7 @@ function validateCurrentPlayer(){
   }
 
 
-
+// iterate over array and create divs.
 function gameDisplayController() {
   let board = GameModule.GameBoardObj.gameboard
   const gameBoardContainer = document.querySelector('#gameboard')
@@ -95,12 +101,14 @@ function markGameboard() { // click stuff and change value on gameboard
     boardTile[i].addEventListener('click', () => { //TODO: updates both board array and dom.
       //create a function to iterate over the arr and
       // if index in arr is empty re render that part only.
+      isValidAction(boardTile[i]) 
+      if(isValidAction(boardTile[i]) === true){
       
-      updateBoard(boardTile[i].id, validateCurrentPlayer())
-      reRenderBoard(boardTile[i].id, validateCurrentPlayer())
-      console.log(gameboardArray)
-      currentPlayerSwitcher()      
-
+        updateBoard(boardTile[i].id, validateCurrentPlayer())
+        reRenderBoard(boardTile[i].id, validateCurrentPlayer())
+        console.log(gameboardArray)
+        currentPlayerSwitcher()      
+      } else {return}
     })
   }
 
