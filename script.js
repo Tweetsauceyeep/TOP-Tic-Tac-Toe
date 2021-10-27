@@ -9,11 +9,6 @@ const playerOne = newPlayer('X', 'playerOne', true)
 const playerTwo = newPlayer('O', 'playerTwo', false)
 // homie use capital letter O 
 
-
-
-
-
-
 // module pattern to keep gameboard out of global scope
 const GameModule = (function () {
   let GameBoardObj = {
@@ -81,10 +76,10 @@ function gameDisplayController() {
     gameBoardContainer.appendChild(moveDiv)
   }
 }
+
 function reRenderBoard(index,currentPlayer) { //TODO: Fix this: check if array has empty. if empty run update board func 
   let boardTile = document.querySelectorAll('.boardtile')
-  boardTile[index].textContent = currentPlayer//TODO:replace w/ current player var    
-
+  boardTile[index].textContent = currentPlayer
 }
 
 function markGameboard() { // click stuff and change value on gameboard  
@@ -95,6 +90,7 @@ function markGameboard() { // click stuff and change value on gameboard
   function updateBoard(index, currentPlayer) {
     gameboardArray[index] = currentPlayer //TODO:replace w/ current player var
   }
+
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
     boardTile[i].addEventListener('click', () => { //TODO: updates both board array and dom.

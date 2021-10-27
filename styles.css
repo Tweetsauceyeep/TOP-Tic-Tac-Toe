@@ -1,5 +1,4 @@
 #gameboard {
-    border: solid 2px black;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 33% 33% 33%;
