@@ -33,8 +33,9 @@ let testFunc = () => {
 //playerTwo.getPlayerTurn = false 
 //playerOne.getPlayerTurn = true 
 //console.log(:q
-validatePlayer())
+validatePlayer()
 testFunc()
 testFunc()
 testFunc()
 testFunc()
+
