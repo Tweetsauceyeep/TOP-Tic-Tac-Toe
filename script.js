@@ -1,3 +1,4 @@
+
 const newPlayer = (getSymbol, getName, getPlayerTurn) => {
   return {getSymbol, getName, getPlayerTurn};
 };
@@ -35,10 +36,23 @@ const GameModule = (function() {
   };
 })();
 console.log(GameModule.GameBoardObj.winningConditions);
-// =====================================FUNCTIONS==============================================
+// =====================================FUNCTIONS====================
+/*
+const gameFunctions = (function(){
 
-// this dont work homo
-function handleResultValidation() {
+
+
+return {
+  handleResultValidation,
+  isValidAction,
+
+}
+
+
+})();
+*/
+// this dont work bro work on a solution ok
+function handleResultValidation() { 
   let board = GameModule.GameBoardObj.gameboard;
   let roundWon = false;
   for (let i = 0; i <= 7; i++) {
@@ -49,11 +63,16 @@ function handleResultValidation() {
     if (a === ' ' || b === ' ' || c === ' ') {
       continue;
     }
-    if (a === b && b === c) {
-      roundWon = true;
+     if (a === b && b === c) {
+      return roundWon = true;
       break;
     }
   }
+  if (roundWon) {
+    console.log('ayyy win')
+  } 
+  
+
 }
 
 const isValidAction = tile => {
@@ -75,6 +94,7 @@ function validateCurrentPlayer() {
   return currentPlayer;
 }
 
+// call this to switch between current players one || two
 function currentPlayerSwitcher() {
   let playerOneTurn = playerOne.getPlayerTurn;
   if (playerOneTurn === true) {
@@ -93,7 +113,7 @@ function gameDisplayController() {
 
   for (let i = 0; i < board.length; i++) {
     let moveDiv = document.createElement('div');
-    moveDiv.textContent = board[i];
+    moveDiv.textContent = board[i]; // not even needed at this point
     moveDiv.id = i;
     moveDiv.classList.add('boardtile');
     gameBoardContainer.appendChild(moveDiv);
@@ -116,6 +136,7 @@ function markGameboard() {
     gameboardArray[index] = currentPlayer; //TODO:replace w/ current player var
   }
 
+
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
     boardTile[i].addEventListener('click', () => {
@@ -124,9 +145,11 @@ function markGameboard() {
       // if index in arr is empty re render that part only.
       isValidAction(boardTile[i]);
       if (isValidAction(boardTile[i]) === true) {
+        // commands to update both the dom board and array
         updateBoard(boardTile[i].id, validateCurrentPlayer());
         reRenderBoard(boardTile[i].id, validateCurrentPlayer());
         console.log(gameboardArray);
+        handleResultValidation(); // this no worky but test TODO:
         currentPlayerSwitcher();
       } else {
         return;

@@ -15,7 +15,7 @@ function validateCurrentPlayer(){
     return currentPlayer
   }
   
-  function currentPlayerSwitcher(){
+  function currentPlayerSwitcherFucker(){
     let playerOneTurn = playerOne.getPlayerTurn
     if(playerOneTurn === true){
       playerOne.getPlayerTurn = false;
