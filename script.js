@@ -37,41 +37,33 @@ const GameModule = (function() {
 })();
 console.log(GameModule.GameBoardObj.winningConditions);
 // =====================================FUNCTIONS====================
-/*
-const gameFunctions = (function(){
 
-
-
-return {
-  handleResultValidation,
-  isValidAction,
-
-}
-
-
-})();
-*/
-// this dont work bro work on a solution ok
-function handleResultValidation() { 
+// this works now i was missing a [i] on line 46
+function handleResultValidation(currentPlayer) { 
+  let resultDisplay = document.querySelector("#resultdisplay") // select div to display stuff
   let board = GameModule.GameBoardObj.gameboard;
   let roundWon = false;
   for (let i = 0; i <= 7; i++) {
-    const winCondition = GameModule.GameBoardObj.winningConditions;
+    const winCondition = GameModule.GameBoardObj.winningConditions[i];
     const a = board[winCondition[0]];
     const b = board[winCondition[1]];
     const c = board[winCondition[2]];
     if (a === ' ' || b === ' ' || c === ' ') {
+      console.log('ayyy')
       continue;
     }
-     if (a === b && b === c) {
-      return roundWon = true;
+    if (a === b && b === c) {
+      roundWon = true;
+      console.log(roundWon)
       break;
     }
   }
   if (roundWon) {
-    console.log('ayyy win')
+
+    resultDisplay.innerText = `The winner is ${currentPlayer}` 
   } 
   
+
 
 }
 
@@ -149,7 +141,7 @@ function markGameboard() {
         updateBoard(boardTile[i].id, validateCurrentPlayer());
         reRenderBoard(boardTile[i].id, validateCurrentPlayer());
         console.log(gameboardArray);
-        handleResultValidation(); // this no worky but test TODO:
+        handleResultValidation(validateCurrentPlayer()); // this no worky but test TODO:
         currentPlayerSwitcher();
       } else {
         return;
