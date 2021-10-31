@@ -2,7 +2,6 @@
 const newPlayer = (getSymbol, getName, getPlayerTurn) => {
   return {getSymbol, getName, getPlayerTurn};
 };
-
 const playerOne = newPlayer('X', 'playerOne', true);
 const playerTwo = newPlayer('O', 'playerTwo', false);
 // homie use capital letter O
@@ -35,9 +34,8 @@ const GameModule = (function() {
     GameBoardObj,
   };
 })();
-console.log(GameModule.GameBoardObj.winningConditions);
 // =====================================FUNCTIONS====================
-
+let isGameActive = true;
 // this works now i was missing a [i] on line 46
 function handleResultValidation(currentPlayer) { 
   let resultDisplay = document.querySelector("#resultdisplay") // select div to display stuff
@@ -58,13 +56,16 @@ function handleResultValidation(currentPlayer) {
       break;
     }
   }
-  if (roundWon) {
 
+  if (roundWon) {
     resultDisplay.innerText = `The winner is ${currentPlayer}` 
+    return isGameActive = false
+
   } 
   
-
-
+  if (!board.includes(' ')) {
+    resultDisplay.innerText = 'its a tie'
+  }
 }
 
 const isValidAction = tile => {
@@ -128,6 +129,14 @@ function markGameboard() {
     gameboardArray[index] = currentPlayer; //TODO:replace w/ current player var
   }
 
+  function endGame(board){
+    if (isGameActive === false){
+      board.removeEventListener('click', function(){
+        board.style.backgroundColor = 'white'
+      })
+    }
+  }
+
 
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
@@ -135,14 +144,14 @@ function markGameboard() {
       //TODO: updates both board array and dom.
       //create a function to iterate over the arr and
       // if index in arr is empty re render that part only.
-      isValidAction(boardTile[i]);
-      if (isValidAction(boardTile[i]) === true) {
+      if (isValidAction(boardTile[i]) === true && isGameActive) {
         // commands to update both the dom board and array
         updateBoard(boardTile[i].id, validateCurrentPlayer());
         reRenderBoard(boardTile[i].id, validateCurrentPlayer());
         console.log(gameboardArray);
         handleResultValidation(validateCurrentPlayer()); // this no worky but test TODO:
         currentPlayerSwitcher();
+        endGame(boardTile[i])
       } else {
         return;
       }
