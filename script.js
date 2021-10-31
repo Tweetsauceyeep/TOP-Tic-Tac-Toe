@@ -137,6 +137,10 @@ function markGameboard() {
     }
   }
 
+  function displayCurrentPlayer(player){
+    let displayPlayer = document.querySelector('#currentplayerdisplay')
+    displayPlayer.innerText =`Current Player: ${player}`
+  }
 
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
@@ -150,6 +154,7 @@ function markGameboard() {
         reRenderBoard(boardTile[i].id, validateCurrentPlayer());
         console.log(gameboardArray);
         handleResultValidation(validateCurrentPlayer()); // this no worky but test TODO:
+        displayCurrentPlayer(validateCurrentPlayer())
         currentPlayerSwitcher();
         endGame(boardTile[i])
       } else {
