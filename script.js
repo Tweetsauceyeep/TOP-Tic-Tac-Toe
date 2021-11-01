@@ -141,7 +141,7 @@ function markGameboard() {
     let displayPlayer = document.querySelector('#currentplayerdisplay')
     displayPlayer.innerText =`Current Player: ${player}`
   }
-
+  
   // iterate over boardtile class and add an event listener to each element
   for (let i = 0; i < boardTile.length; i++) {
     boardTile[i].addEventListener('click', () => {
@@ -149,7 +149,7 @@ function markGameboard() {
       //create a function to iterate over the arr and
       // if index in arr is empty re render that part only.
       if (isValidAction(boardTile[i]) === true && isGameActive) {
-        // commands to update both the dom board and array
+    // commands to update both the dom board and array
         updateBoard(boardTile[i].id, validateCurrentPlayer());
         reRenderBoard(boardTile[i].id, validateCurrentPlayer());
         console.log(gameboardArray);
@@ -157,11 +157,15 @@ function markGameboard() {
         displayCurrentPlayer(validateCurrentPlayer())
         currentPlayerSwitcher();
         endGame(boardTile[i])
-      } else {
+      } 
+
+      else {
         return;
       }
     });
   }
 }
+
+
 gameDisplayController();
 markGameboard();
