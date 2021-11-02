@@ -1,6 +1,3 @@
-body {
-    background-color: grey;
-}
 
 #gameboard {
     margin: 0 auto;
@@ -10,8 +7,10 @@ body {
     max-width: 300px;
 }
 
-.boardtile{
 
+
+.boardtile{
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     background-color: white;
     border: solid #81A4CD 1px;
     font-size: 80px ;
@@ -26,3 +25,18 @@ body {
 
 }
 
+
+#currentplayerdisplay {
+    display: flexbox;
+    text-align: center;
+}
+
+#resultdisplay {
+    display: flexbox;
+    text-align: center;
+}
+
+#resetbutton {
+    display: flexbox;
+    margin: auto;
+}
