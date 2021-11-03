@@ -36,7 +36,7 @@ const GameModule = (function() {
 })();
 // =====================================FUNCTIONS====================
 let isGameActive = true;
-// this works now i was missing a [i] on line 46
+// this works now i was missing a [i] on line 45
 function handleResultValidation(currentPlayer) { 
   let resultDisplay = document.querySelector("#resultdisplay") // select div to display stuff
   let board = GameModule.GameBoardObj.gameboard;
@@ -47,12 +47,10 @@ function handleResultValidation(currentPlayer) {
     const b = board[winCondition[1]];
     const c = board[winCondition[2]];
     if (a === ' ' || b === ' ' || c === ' ') {
-      console.log('ayyy')
       continue;
     }
     if (a === b && b === c) {
       roundWon = true;
-      console.log(roundWon)
       break;
     }
   }
@@ -152,7 +150,6 @@ function markGameboard() {
     // commands to update both the dom board and array
         updateBoard(boardTile[i].id, validateCurrentPlayer());
         reRenderBoard(boardTile[i].id, validateCurrentPlayer());
-        console.log(gameboardArray);
         handleResultValidation(validateCurrentPlayer()); // this no worky but test TODO:
         displayCurrentPlayer(validateCurrentPlayer())
         currentPlayerSwitcher();
@@ -169,3 +166,4 @@ function markGameboard() {
 
 gameDisplayController();
 markGameboard();
+
